@@ -79,17 +79,20 @@ public class Canvas {
   }
 
   public void drawLine(int fromX, int fromY, int toX, int toY) {
-    int midX = (fromX + toX) / 2;
-    int midY = (fromY + toY) / 2;
+    setPixel(fromX, fromY, pixel);
+    setPixel(toX, toY, pixel);
 
-    if ((fromX == midX && fromY == midY) || (toX == midX && toY == midY)) {
-      return;
+    int midX = (fromX + toX) >> 1;
+    int midY = (fromY + toY) >> 1;
+
+    var isSameMidPoint = (fromX == midX && fromY == midY) || (toX == midX && toY == midY);
+
+    if (!isSameMidPoint) {
+      setPixel(midX, midY, pixel);
+
+      drawLine(fromX, fromY, midX, midY);
+      drawLine(midX, midY, toX, toY);
     }
-
-    setPixel(midX, midY, pixel);
-
-    drawLine(fromX, fromY, midX, midY);
-    drawLine(midX, midY, toX, toY);
   }
 
   public void reset(int width, int height) {

@@ -29,6 +29,6 @@ public class CommandBrush extends CommandBase {
 
   @Override
   public void execute(Canvas canvas) {
-    canvas.fill(point.getAxisX(), point.getAxisY(), color);
+    canvas.fill(point.getAxisX() - 1, point.getAxisY() - 1, color);
   }
 }

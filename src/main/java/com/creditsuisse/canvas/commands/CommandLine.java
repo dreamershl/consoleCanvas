@@ -5,8 +5,8 @@ import com.creditsuisse.canvas.Point;
 import java.util.regex.Pattern;
 
 public class CommandLine extends CommandBase {
-  private Point from;
-  private Point to;
+  protected Point from;
+  protected Point to;
 
   protected CommandLine() {
     this(ACTION.LINE);
@@ -31,6 +31,6 @@ public class CommandLine extends CommandBase {
 
   @Override
   public void execute(Canvas canvas) {
-    canvas.drawLine(from.getAxisX(), from.getAxisY(), to.getAxisX(), to.getAxisY());
+    canvas.drawLine(from.getAxisX() - 1, from.getAxisY() - 1, to.getAxisX() - 1, to.getAxisY() - 1);
   }
 }
