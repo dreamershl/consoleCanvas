@@ -1,22 +1,28 @@
 package com.creditsuisse;
 
+import com.creditsuisse.canvas.commands.ACTION;
+import com.creditsuisse.canvas.commands.CommandFactory;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
+import javax.inject.Inject;
+import org.junit.jupiter.api.Assertions;
 
 public class IOSteps {
-    @Given("user input string {string}")
-    public void userInputString(String input) {
+  private final CommandFactory commandFactory;
 
-    }
+  @Inject
+  public IOSteps(CommandFactory commandFactory) {
+    this.commandFactory = commandFactory;
+  }
 
+  @Given("command parser will parse the string {string} into {string} with {string}")
+  public void commandParserWillParseTheStringIntoWith(String input,
+                                                      String commandName,
+                                                      String parameterString) throws Exception {
 
-    @Then("command parser will parse the string into {string} and get the correct <parameterCount> as {string}")
-    public void commandParserWillParseTheStringIntoAndGetTheCorrectParameterCountAs(String arg0, String arg1) {
+    var command = commandFactory.parse(input);
 
-    }
-
-    @Then("command parser will parse the string into {string} and get the correct {int} as {string}")
-    public void commandParserWillParseTheStringIntoAndGetTheCorrectAs(String command, int count, String parameterString) {
-
-    }
+    Assertions.assertNotNull(command);
+    Assertions.assertEquals(ACTION.valueOf(commandName), command.getAction());
+    Assertions.assertEquals(parameterString, command.getParameters());
+  }
 }

@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'checkstyle'
+    id "io.freefair.lombok" version "6.4.1"
 }
 
 group 'org.creditsusse'
@@ -9,27 +10,42 @@ version '1.0-SNAPSHOT'
 def cucumberVersion = '7.2.3'
 def junitVersion = '5.8.2'
 def junitSuiteVersion = '1.8.2'
+def guiceVersion = '5.1.0'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    implementation "com.google.inject:guice:${guiceVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
     testImplementation "org.junit.platform:junit-platform-suite:${junitSuiteVersion}"
 
     testImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
+    implementation "io.cucumber:cucumber-guice:${cucumberVersion}"
     testImplementation "io.cucumber:cucumber-junit-platform-engine:${cucumberVersion}"
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform() {
+        excludeTags("disabled")
+    }
+
+    // cucumber options
+    systemProperty("cucumber.junit-platform.naming-strategy", "long")
+    systemProperty("cucumber.execution.parallel.enabled", true)
+    systemProperty("cucumber.plugin", "timeline:build/reports/tests/timeline, html:build/reports/tests/cucumber.html")
+    systemProperty("cucumber.publish.quiet", "true")
 }
 
 checkstyle {
-    configFile file('config/checkstyle/google_checkstyle.xml');
     toolVersion '10.1'
+    configFile file('config/checkstyle/google_checks.xml')
+    configProperties = [
+            "org.checkstyle.google.suppressionfilter.config":
+                    "$projectDir/config/checkstyle/google_checks_suppressions.xml",
+    ]
 }
 
 tasks.withType(Checkstyle) {

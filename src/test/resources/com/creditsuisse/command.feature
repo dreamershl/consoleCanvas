@@ -1,13 +1,14 @@
 Feature: Take input from IO for canvas operations
 
+  @isolated
   Scenario Outline: User can input the following commands to manipulate the canvas
-    Given user input string "<input>"
-    Then command parser will parse the string into "<command>" and get the correct <parameter Count> as "<parameters>"
+    Given command parser will parse the string "<input>" into "<command>" with "<parameters>"
 
     Examples:
-      | input         | command | parameter Count | parameters  |
-      | C w h         | C       | 2               | w,h         |
-      | L x1 y1 x2 y2 | L       | 4               | x1,y1,x2,y2 |
-      | R x1 y1 x2 y2 | L       | 4               | x1,y1,x2,y2 |
-      | B x y c       | L       | 3               | x,y,c       |
-      | Q             | Q       | 0               |             |
+      | input       | command | parameters                                        |
+      | C 20 4      | CREATE  | 20,4                                              |
+      | L 1 2 6 2   | LINE    | Point(axisX=1, axisY=2);Point(axisX=6, axisY=2)   |
+      | L 6 3 6 4   | LINE    | Point(axisX=6, axisY=3);Point(axisX=6, axisY=4)   |
+      | R 14 1 18 3 | RECT    | Point(axisX=14, axisY=1);Point(axisX=18, axisY=3) |
+      | B 10 3 o    | BRUSH   | Point(axisX=10, axisY=3),o                        |
+      | Q           | QUIT    |                                                   |
