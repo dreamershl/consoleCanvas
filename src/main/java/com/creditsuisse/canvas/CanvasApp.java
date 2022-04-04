@@ -3,12 +3,14 @@ package com.creditsuisse.canvas;
 import com.creditsuisse.canvas.commands.ACTION;
 import com.creditsuisse.canvas.commands.Command;
 import com.creditsuisse.canvas.commands.CommandFactory;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CanvasApp {
   public static void main(String[] args) {
     printHelp();
 
+    char[][] buffer;
     Canvas canvas = new Canvas(0, 0, 'x');
     CommandFactory commandFactory = new CommandFactory();
     Scanner console = new Scanner(System.in);
@@ -23,7 +25,7 @@ public class CanvasApp {
           break;
         } else {
           canvas.addCommand(command);
-          canvas.render();
+          buffer = canvas.render();
         }
 
       } catch (Exception e) {
@@ -31,13 +33,45 @@ public class CanvasApp {
         System.out.println("Error:" + e.getMessage());
 
         printHelp();
+        buffer = canvas.render();
       }
+
+      print(buffer);
     }
+  }
+
+  private static void print(char[][] buffer) {
+    int width = 0;
+    if (buffer.length > 0) {
+      width = buffer[0].length;
+    }
+
+    var borderX = new char[width + 2];
+    Arrays.fill(borderX, '-');
+
+    System.out.println(borderX);
+
+    for (char[] chars : buffer) {
+      for (int index = 0; index < width; index++) {
+        if (index == 0) {
+          System.out.print('|');
+        }
+
+        System.out.print((char) chars[index]);
+
+        if (index == (width - 1)) {
+          System.out.print('|');
+        }
+      }
+      System.out.println();
+    }
+
+    System.out.println(borderX);
   }
 
   private static void printHelp() {
     String help = """
-        Command 		Description
+        Command         Description
         C w h           Should create a new canvas of width w and height h.
         L x1 y1 x2 y2   Should create a new line from (x1,y1) to (x2,y2). Currently only
                         horizontal or vertical lines are supported. Horizontal and vertical lines

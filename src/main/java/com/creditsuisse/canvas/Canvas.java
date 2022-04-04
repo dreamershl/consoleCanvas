@@ -9,7 +9,6 @@ public class Canvas {
   private final List<Command> commandList = new ArrayList<>();
   private final char pixel;
 
-  private char[] borderX;
   private int height;
   private int width;
   private char[][] buffer;
@@ -48,11 +47,24 @@ public class Canvas {
   }
 
   private char getPixel(int pointX, int pointY) {
-    return buffer[convertToCanvasAxisY(pointY)][convertToCanvasAxisX(pointX)];
+    pointY = convertToCanvasAxisY(pointY);
+    pointX = convertToCanvasAxisX(pointX);
+
+    char result = 0;
+    if (height > 0 && width > 0) {
+      result = buffer[pointY][pointX];
+    }
+
+    return result;
   }
 
   private void setPixel(int pointX, int pointY, char color) {
-    buffer[convertToCanvasAxisY(pointY)][convertToCanvasAxisX(pointX)] = color;
+    pointY = convertToCanvasAxisY(pointY);
+    pointX = convertToCanvasAxisX(pointX);
+
+    if (height > 0 && width > 0) {
+      buffer[pointY][pointX] = color;
+    }
   }
 
   public void fill(int pointX, int pointY, char color) {
@@ -107,33 +119,12 @@ public class Canvas {
     for (var row : buffer) {
       Arrays.fill(row, ' ');
     }
-
-    borderX = new char[width + 2];
-    Arrays.fill(borderX, '-');
   }
 
-  public void render() {
+  public char[][] render() {
     for (var command : commandList) {
       command.execute(this);
     }
-
-    System.out.println(borderX);
-
-    for (int i = 0; i < this.height; i++) {
-      for (int j = 0; j < this.width; j++) {
-        if (j == 0) {
-          System.out.print('|');
-        }
-
-        System.out.print((char) buffer[i][j]);
-
-        if (j == (this.width - 1)) {
-          System.out.print('|');
-        }
-      }
-      System.out.println();
-    }
-
-    System.out.println(borderX);
+    return buffer;
   }
 }

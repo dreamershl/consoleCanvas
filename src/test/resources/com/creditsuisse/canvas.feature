@@ -1,4 +1,4 @@
-Feature: Take input from IO for canvas operations
+Feature: Canvas operations
 
   Scenario Outline: User can input the following commands to manipulate the canvas
     Given command parser will parse the string "<input>" into "<command>" with "<parameters>"

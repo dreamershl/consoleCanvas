@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'checkstyle'
     id "io.freefair.lombok" version "6.4.1"
+    id 'jacoco'
 }
 
 group 'org.creditsusse'
@@ -28,6 +29,8 @@ dependencies {
 }
 
 test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+
     useJUnitPlatform() {
         excludeTags("disabled")
     }
