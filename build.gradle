@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'checkstyle'
+}
+
+group 'org.creditsusse'
+version '1.0-SNAPSHOT'
+
+def cucumberVersion = '7.2.3'
+def junitVersion = '5.8.2'
+def junitSuiteVersion = '1.8.2'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testImplementation "org.junit.platform:junit-platform-suite:${junitSuiteVersion}"
+
+    testImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
+    testImplementation "io.cucumber:cucumber-junit-platform-engine:${cucumberVersion}"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+checkstyle {
+    configFile file('config/checkstyle/google_checkstyle.xml');
+    toolVersion '10.1'
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.required = false
+        html.required = true
+    }
+}
