@@ -1,8 +1,8 @@
-package com.creditsuisse;
+package com.xceder.canvas;
 
-import com.creditsuisse.canvas.commands.ACTION;
-import com.creditsuisse.canvas.commands.Command;
-import com.creditsuisse.canvas.commands.CommandFactory;
+import com.xceder.canvas.commands.ACTION;
+import com.xceder.canvas.commands.Command;
+import com.xceder.canvas.commands.CommandFactory;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

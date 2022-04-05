@@ -1,4 +1,4 @@
-package com.creditsuisse.canvas;
+package com.xceder.canvas;
 
 import lombok.Data;
 

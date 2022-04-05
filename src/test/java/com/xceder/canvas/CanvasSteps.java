@@ -1,8 +1,7 @@
-package com.creditsuisse;
+package com.xceder.canvas;
 
-import com.creditsuisse.canvas.Canvas;
-import com.creditsuisse.canvas.commands.Command;
 import com.google.common.io.BaseEncoding;
+import com.xceder.canvas.commands.Command;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Then;
 import java.nio.charset.StandardCharsets;

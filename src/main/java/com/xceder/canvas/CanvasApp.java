@@ -1,8 +1,8 @@
-package com.creditsuisse.canvas;
+package com.xceder.canvas;
 
-import com.creditsuisse.canvas.commands.ACTION;
-import com.creditsuisse.canvas.commands.Command;
-import com.creditsuisse.canvas.commands.CommandFactory;
+import com.xceder.canvas.commands.ACTION;
+import com.xceder.canvas.commands.Command;
+import com.xceder.canvas.commands.CommandFactory;
 import java.util.Arrays;
 import java.util.Scanner;
 

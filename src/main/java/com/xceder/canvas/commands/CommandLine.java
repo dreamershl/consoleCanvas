@@ -1,7 +1,7 @@
-package com.creditsuisse.canvas.commands;
+package com.xceder.canvas.commands;
 
-import com.creditsuisse.canvas.Canvas;
-import com.creditsuisse.canvas.Point;
+import com.xceder.canvas.Canvas;
+import com.xceder.canvas.Point;
 import java.util.regex.Pattern;
 
 public class CommandLine extends CommandBase {

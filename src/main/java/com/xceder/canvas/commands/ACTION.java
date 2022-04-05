@@ -1,4 +1,4 @@
-package com.creditsuisse.canvas.commands;
+package com.xceder.canvas.commands;
 
 public enum ACTION {
   UNKNOWN(""),

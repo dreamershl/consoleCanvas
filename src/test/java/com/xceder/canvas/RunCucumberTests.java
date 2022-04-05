@@ -1,4 +1,4 @@
-package com.creditsuisse;
+package com.xceder.canvas;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

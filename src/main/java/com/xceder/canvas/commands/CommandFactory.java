@@ -1,4 +1,4 @@
-package com.creditsuisse.canvas.commands;
+package com.xceder.canvas.commands;
 
 import java.util.regex.Pattern;
 import javax.inject.Singleton;

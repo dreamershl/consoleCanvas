@@ -1,6 +1,6 @@
-package com.creditsuisse.canvas;
+package com.xceder.canvas;
 
-import com.creditsuisse.canvas.commands.Command;
+import com.xceder.canvas.commands.Command;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

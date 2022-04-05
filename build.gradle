@@ -8,6 +8,7 @@ plugins {
 group 'org.creditsusse'
 version '1.0-SNAPSHOT'
 
+
 def cucumberVersion = '7.2.3'
 def junitVersion = '5.8.2'
 def junitSuiteVersion = '1.8.2'
@@ -16,6 +17,12 @@ def guavaVersion = '31.1-jre'
 
 repositories {
     mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.xceder.canvas.CanvasApp'
+    }
 }
 
 dependencies {

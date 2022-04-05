@@ -1,6 +1,6 @@
-package com.creditsuisse.canvas.commands;
+package com.xceder.canvas.commands;
 
-import com.creditsuisse.canvas.Canvas;
+import com.xceder.canvas.Canvas;
 import java.util.regex.Pattern;
 
 public class CommandCreateCanvas extends CommandBase {

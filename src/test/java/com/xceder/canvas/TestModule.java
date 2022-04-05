@@ -1,9 +1,9 @@
-package com.creditsuisse;
+package com.xceder.canvas;
 
-import com.creditsuisse.canvas.commands.Command;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
+import com.xceder.canvas.commands.Command;
 import java.util.ArrayList;
 import java.util.List;
 
