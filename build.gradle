@@ -12,6 +12,7 @@ def cucumberVersion = '7.2.3'
 def junitVersion = '5.8.2'
 def junitSuiteVersion = '1.8.2'
 def guiceVersion = '5.1.0'
+def guavaVersion = '31.1-jre'
 
 repositories {
     mavenCentral()
@@ -19,6 +20,8 @@ repositories {
 
 dependencies {
     implementation "com.google.inject:guice:${guiceVersion}"
+    implementation "com.google.guava:guava:${guavaVersion}"
+
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
     testImplementation "org.junit.platform:junit-platform-suite:${junitSuiteVersion}"
@@ -40,6 +43,7 @@ test {
     systemProperty("cucumber.execution.parallel.enabled", true)
     systemProperty("cucumber.plugin", "timeline:build/reports/tests/timeline, html:build/reports/tests/cucumber.html")
     systemProperty("cucumber.publish.quiet", "true")
+    systemProperty("cucumber.execution.exclusive-resources.Isolated.read-write", "org.junit.platform.engine.support.hierarchical.ExclusiveResource.GLOBAL_KEY")
 }
 
 checkstyle {

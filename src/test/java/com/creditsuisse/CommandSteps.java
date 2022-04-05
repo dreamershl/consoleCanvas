@@ -6,31 +6,33 @@ import com.creditsuisse.canvas.commands.CommandFactory;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.List;
 import javax.inject.Inject;
 import org.junit.jupiter.api.Assertions;
 
 @ScenarioScoped
-public class IOSteps {
+public class CommandSteps {
   private final CommandFactory commandFactory;
-  private final Map<ACTION, Command> commandMap = new EnumMap<>(ACTION.class);
+  private final List<Command> commandList;
 
   @Inject
-  public IOSteps(CommandFactory commandFactory) {
+  public CommandSteps(CommandFactory commandFactory,
+                      List<Command> commandList) {
     this.commandFactory = commandFactory;
+    this.commandList = commandList;
   }
 
-  @When("the input string is {string}")
-  public void theInputStringIs(String input) throws Exception {
-    var command = commandFactory.parse(input);
-    commandMap.put(command.getAction(), command);
+  @When("the command string is {string}")
+  public void theInputStringIs(String commandLine) throws Exception {
+    var command = commandFactory.parse(commandLine);
+    commandList.add(command);
   }
 
   @Then("command parser will parse it into {string} with {string}")
   public void commandParserWillParseItIntoWith(String commandName, String parameters) {
     var action = ACTION.valueOf(commandName);
-
-    Assertions.assertEquals(parameters, commandMap.get(action).getParameters());
+    var lastCommand = commandList.get(commandList.size() - 1);
+    Assertions.assertEquals(action, lastCommand.getAction());
+    Assertions.assertEquals(parameters, lastCommand.getParameters());
   }
 }

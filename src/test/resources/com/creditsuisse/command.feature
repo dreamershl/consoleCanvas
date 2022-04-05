@@ -1,7 +1,7 @@
 Feature: Take input from IO for canvas operations
 
   Scenario Outline: User can input the following commands
-    When the input string is "<input>"
+    When the command string is "<input>"
     Then command parser will parse it into "<command>" with "<parameters>"
 
     Examples:
