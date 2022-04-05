@@ -8,7 +8,7 @@ import org.junit.platform.suite.api.SelectClasspathResource;
 import org.junit.platform.suite.api.Suite;
 
 @Suite
-@SelectClasspathResource("com/creditsuisse")
+@SelectClasspathResource("com/xceder")
 public class RunCucumberTests implements InjectorSource {
   private final Injector injector = Guice.createInjector(CucumberModules.createScenarioModule(),
       new TestModule());
